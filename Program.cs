@@ -1,31 +1,26 @@
-﻿
+﻿using System.Collections;
+using algorithemProgrammingSample;
 
+Console.WriteLine("Please enter the string:");
+string input = Console.ReadLine();
+HuffmanTree huffmanTree = new HuffmanTree();
 
+// Build the Huffman tree
+huffmanTree.Build(input);
 
-using recursiveProgrammingSample.UnivercitySample.subtractionHumanAproach;
+// Encode
+BitArray encoded = huffmanTree.Encode(input);
 
-int[,] array = new int[2,5]{  { 1, 2, 3, 4, 5 } , //first number
-                            { 0, 0, 7, 8, 9 }   //secound number
-                          }; //true result is 1 1 5 5 6
-
-/////recursive implement test
-IsubtractionHumanAproach objRecursive = new subtractionRecursive();
-
-var resultRecursive = objRecursive.Calculate(array);
-
-Console.WriteLine("\nrecursive output: ");
-
-foreach (var item in resultRecursive)
+Console.Write("Encoded: ");
+foreach (bool bit in encoded)
 {
-    Console.Write(item + " ");
+   Console.Write((bit ? 1 : 0) + "");
 }
+Console.WriteLine();
 
-/////simple implement test
-IsubtractionHumanAproach objsimple = new subtractionRecursive();
-var resultSimple = objsimple.Calculate(array);
-Console.WriteLine("\nSimple output: ");
+// Decode
+string decoded = huffmanTree.Decode(encoded);
 
-foreach (var item in resultSimple)
-{
-    Console.Write(item + " ");
-}
+Console.WriteLine("Decoded: " + decoded);
+
+Console.ReadLine();
